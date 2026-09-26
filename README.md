@@ -15,6 +15,8 @@ classification and sentiment heads, and LoRA fine-tuning of a modern generative 
   fell over 3 epochs (1.779 → 1.760 → 1.650). With greedy decoding the adapter changed 1 of 5 held-out answers: a clear improvement on an
   open-ended prompt, identical output on four short factual ones. The test asserts exactly that.
 
+Measured results, each with the question, the test and the decision: [docs/FINDINGS.md](docs/FINDINGS.md).
+
 ## Architecture
 
 ```mermaid
