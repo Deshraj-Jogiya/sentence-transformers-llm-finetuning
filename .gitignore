@@ -5,3 +5,4 @@ __pycache__/
 # saved explicitly via save_pretrained after training)
 qwen-lora-dolly/
 finetuning/qwen-lora-dolly/
+__pycache__/
