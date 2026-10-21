@@ -31,9 +31,10 @@ def build_sentence_transformer(preprocessor, encoder):
     encoder_inputs = preprocessor(text_input)
     outputs = encoder(encoder_inputs)
 
-    # Mean pooling across the token embeddings
+    # Mean pooling across the real tokens; the input mask keeps padding positions out of the average
     token_embeddings = outputs['sequence_output']
-    sentence_embedding = tf.reduce_mean(token_embeddings, axis=1)
+    mask = tf.cast(encoder_inputs['input_mask'], token_embeddings.dtype)[:, :, tf.newaxis]
+    sentence_embedding = tf.reduce_sum(token_embeddings * mask, axis=1) / tf.maximum(tf.reduce_sum(mask, axis=1), 1.0)
 
     # Normalize embeddings
     normalized_embedding = tf.keras.layers.LayerNormalization(name="layer_norm")(sentence_embedding)
